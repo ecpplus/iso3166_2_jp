@@ -1,8 +1,9 @@
-# Iso31662Jp
+# ISO 3166:2 JP
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/iso_3166_2_jp`. To experiment with that code, run `bin/console` for an interactive prompt.
+Ruby gem of retrieve all 47 code of Japanese prefectures(subdivisions).
 
-TODO: Delete this and the text above, and describe your gem
+Codes are defined at: https://www.iso.org/obp/ui/#iso:code:3166:JP
+
 
 ## Installation
 
@@ -22,15 +23,77 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+### Retrieve all codes
+```ruby
+irb(main):001:0> ISO3166_2JP::Subdivision.all
+[#<ISO3166_2JP::Subdivision:0x007fa579a4c920
+  @code="JP-01",
+  @name_en="Hokkaido",
+  @name_ja="北海道",
+  @numeric=1>,
+ #<ISO3166_2JP::Subdivision:0x007fa579a4c5b0
+  @code="JP-02",
+  @name_en="Aomori",
+  @name_ja="青森",
+  @numeric=2>,
+  ...
+```
 
-## Development
+### Retrieve a subdivision by code
+The code format is `/\ZJP-\d{2}\z/` (JP-01,JP-02,..,JP-47)
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+```ruby
+irb(main):001:0> ISO3166_2JP::Subdivision.by_code('JP-13')
+#<ISO3166_2JP::Subdivision:0x007fa579a477e0
+ @code="JP-13",
+ @name_en="Tokyo",
+ @name_ja="東京",
+ @numeric=13>
+```
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+### Retrieve a subdivision by numeric
+The 'numeric' is a numeric contained by a code.
+For example, the 'numeric' of code`JP-01` is `1`.
+
+```ruby
+irb(main):001:0> ISO3166_2JP::Subdivision.by_numeric(13)
+=> #<ISO3166_2JP::Subdivision:0x007fa579a477e0
+ @code="JP-13",
+ @name_en="Tokyo",
+ @name_ja="東京",
+ @numeric=13>
+ ```
+
+### Retrieve a subdivision by name in Japanese
+
+```ruby
+irb(main):001:0> ISO3166_2JP::Subdivision.by_name_ja('東京')
+=> #<ISO3166_2JP::Subdivision:0x007fa579a477e0
+ @code="JP-13",
+ @name_en="Tokyo",
+ @name_ja="東京",
+ @numeric=13>
+```
+
+### Retrieve a subdivision by name in English
+
+```ruby
+irb(main):001:0> ISO3166_2JP::Subdivision.by_name_en('Tokyo')
+#<ISO3166_2JP::Subdivision:0x007fa579a477e0
+ @code="JP-13",
+ @name_en="Tokyo",
+ @name_ja="東京",
+ @numeric=13>
+ 
+irb(main):002:0> ISO3166_2JP::Subdivision.by_name_en('tokyo')
+#<ISO3166_2JP::Subdivision:0x007fa579a477e0
+ @code="JP-13",
+ @name_en="Tokyo",
+ @name_ja="東京",
+ @numeric=13>
+```
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/iso_3166_2_jp. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/ecpplus/iso_3166_2_jp. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
