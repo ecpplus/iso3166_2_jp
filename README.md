@@ -1,5 +1,7 @@
 # ISO 3166:2 JP
 
+[![CircleCI](https://circleci.com/gh/ecpplus/iso3166_2_jp.svg?style=svg)](https://circleci.com/gh/ecpplus/iso3166_2_jp)
+
 Ruby gem of retrieve all 47 code of Japanese prefectures(subdivisions).
 
 Codes are defined at: https://www.iso.org/obp/ui/#iso:code:3166:JP
